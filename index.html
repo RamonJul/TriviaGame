@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  
+</head>
+<!-- onload="myfunction()" -->
+<body >
+    <div class="container">
+        <div class="row header">
+            <div class="col-md-12 jumbotron">
+                <p id="EndScreen">Welcome to</p>
+                <h1 id="question" class="display-4">TRIVIA NIGHT</h1>
+                <p  id="answer" class="lead">Hope you got your thinking hats on</p>
+                <hr class="my-4">
+                <p id="corrects">and possibly some beer</p>
+                <p id="wrong"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 id="instruction">Press any key to start</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 canvas">
+                            <h3 id="timer"></h3>
+                        <canvas id="myCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row button">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-secondary" id="choice_1">Secondary</button>
+                    </div>
+                </div>
+                <div class="row button">
+                    <div class="col-md-12">
+                        <button type="button"   class="btn btn-secondary" id="choice_2">Secondary</button>
+                    </div>
+                </div>
+                <div class="row button">
+                    <div class="col-md-12">
+                        <button type="button"  class="btn btn-secondary" id="choice_3">Secondary</button>
+                    </div>
+                </div>
+                <div class="row button">
+                    <div class="col-md-12">
+                        <button type="button"  class="btn btn-secondary" id="choice_4">Secondary</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/javascript/app.js"></script>
+</body>
+</html>
