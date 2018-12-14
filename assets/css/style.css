@@ -1,5 +1,8 @@
-div{
-    border: 2px solid red
+.col-md-6, .col-md-4,.jumbotron{
+    border: 2px solid silver;
+    color: white;
+    background-image:url(../images/ep_naturalblack.png);
+    box-shadow: 10px 10px 40px #763505    ;
 }
 
 * {box-sizing: border-box; }
@@ -21,18 +24,20 @@ body{
 }
 
 /* 2nd row */
-/* timer areaa */
-.col-md-4{
-    margin-left:25px
+.half{
+   justify-content: space-evenly;
 }
+/* timer areaa */
+
+
 #instruction{
-    height: 100px;
+    margin-top:10px;
     text-align: center
 }
 #timer{
     position: absolute;
-    left:166.165px;
-   bottom:  77.5px;
+    left:171.5px;
+   bottom:  50px;
    text-align: center;
    width :33px;
 }
@@ -48,8 +53,16 @@ canvas{
 /* answer area */
 .col-md-6{
     text-align: center;
-    margin-left: 100px;
+    /* margin-left: 100px; */
 }
+
+
 .button{
     margin: 4% 0
+}
+.btn{
+    background-image: 
+}
+#choice_1{
+    margin-top: 4%;
 }

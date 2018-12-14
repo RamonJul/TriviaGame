@@ -1,40 +1,61 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
-  
+
 </head>
 <!-- onload="myfunction()" -->
-<body >
+
+<body>
     <div class="container">
         <div class="row header">
-            <div class="col-md-12 jumbotron">
-                <p id="EndScreen">Welcome to</p>
-                <h1 id="question" class="display-4">TRIVIA NIGHT</h1>
-                <p  id="answer" class="lead">Hope you got your thinking hats on</p>
-                <hr class="my-4">
-                <p id="corrects">and possibly some beer</p>
-                <p id="wrong"></p>
+            <div id="carouselExampleControls" class="col-md-12  head carousel slide" data-="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    <div id="slide-1" class="jumbotron carousel-item active">
+                        <p id="EndScreen">Welcome to</p>
+                        <h1 id="question" class="display-4">TRIVIA NIGHT</h1>
+                        <p id="answer" class="lead">Hope you got your thinking hats on</p>
+                        <hr class="my-4">
+                        <p id="corrects">and possibly some beer</p>
+                        <p id="wrong"></p>
+                    </div>
+                    <div id="slide-2" class="jumbotron carousel-item">
+                        <p id="EndScreen"></p>
+                        <h1 id="question" class="display-4"></h1>
+                        <p id="answer" class="lead"></p>
+                        <hr class="my-4">
+                        <p id="corrects"></p>
+                        <p id="wrong"></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row half">
             <div class="col-md-4">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 guide">
                         <h2 id="instruction">Press any key to start</h2>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row timer_holder">
                     <div class="col-md-12 canvas">
-                            <h3 id="timer"></h3>
+                        <h3 id="timer">1</h3>
                         <canvas id="myCanvas"></canvas>
                     </div>
                 </div>
@@ -47,22 +68,25 @@
                 </div>
                 <div class="row button">
                     <div class="col-md-12">
-                        <button type="button"   class="btn btn-secondary" id="choice_2">Secondary</button>
+                        <button type="button" class="btn btn-secondary" id="choice_2">Secondary</button>
                     </div>
                 </div>
                 <div class="row button">
                     <div class="col-md-12">
-                        <button type="button"  class="btn btn-secondary" id="choice_3">Secondary</button>
+                        <button type="button" class="btn btn-secondary" id="choice_3">Secondary</button>
                     </div>
                 </div>
                 <div class="row button">
                     <div class="col-md-12">
-                        <button type="button"  class="btn btn-secondary" id="choice_4">Secondary</button>
+                        <button type="button" class="btn btn-secondary" id="choice_4">Secondary</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="assets/javascript/app.js"></script>
+
 </body>
+
 </html>

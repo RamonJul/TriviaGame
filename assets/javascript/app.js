@@ -1,25 +1,28 @@
 
 
 var start = false;
-var question_list = ["What is 1+1?", "What is 2+2"]
+var question_list = {
+    questions: ["Which two religous figures shared an animated show together?", "In 2017, The Dallas Moning News aplogized for misspelling what word in 1977"],
+    choice_1: [["Jesus and The Pope", "wrong"], ["Banana", "wrong"]],
+    choice_2: [["Buddha and Jesus", "correct"], ["Queen Elizabeth II", "wrong"]],
+    choice_3: [["Muhammad and Abraham", "wrong"], ["Wookiee", "correct"]],
+    choice_4: [["Dalai Lama and Ghandi", "wrong"], ["Voyager", "wrong"]],
+    extra_trivia: ["The show was called Saint Young Men"," They spelled it wookie"]
+}
+console.log(question_list.choice_1[0][0])
+console.log(question_list)
 var done = [];
 var length;
 var times = 0;
 var right = 0;
 var wrong = 0;
 var GameintervalId;
-var answer = document.getElementById("answer")
 var choice1 = document.getElementById("choice_1")
 var choice2 = document.getElementById("choice_2")
 var choice3 = document.getElementById("choice_3")
 var choice4 = document.getElementById("choice_4")
-var question = document.getElementById("question")
-length = question_list.length
-// choice1.disabled=true
-// choice2.disabled=true
-// choice3.disabled=true
-// choice4.disabled=true
-console.log(length)
+length = question_list.questions.length
+
 for (var i = 0; i < length; i++) {
     done.push(1)
 }
@@ -33,83 +36,109 @@ function button_state(state, op) {
     choice2.style.opacity = op
     choice3.style.opacity = op
     choice4.style.opacity = op
-
 }
 
 function Question() {
-    document.getElementById("instruction").textContent = ""
-    document.getElementById("EndScreen").textContent = ""
-    answer.textContent = ""
-    document.getElementById("corrects").textContent = ("")
-    times++
-    console.log("start")
-    console.log(times)
-    console.log(length)
-    var choice_1 = [[3, "wrong"], [3, "wrong"]]
-    var choice_2 = [[2, "correct"], [6, "wrong"]]
-    var choice_3 = [[1, "wrong"], [4, "correct"]]
-    var choice_4 = [[4, "wrong"], [1, "wrong"]]
-
-    while (true) {
-        var q = Math.floor(Math.random() * length)
-        console.log(q)
-        if (done[q] != 0) {
-            console.log(done)
-            done[q] = (0);
-            break
-        }
+    if (times === length) {
+        endstate;
+        done = []
+        times = 0;
+        endstate(document.getElementsByClassName("next")[0].children);
     }
-    button_state(false, 1)
-    question.textContent = question_list[q]
-    choice1.textContent = choice_1[q][0]
-    choice1.setAttribute("id", choice_1[q][1])
-    choice2.textContent = choice_2[q][0]
-    choice2.setAttribute("id", choice_2[q][1])
-    choice3.textContent = choice_3[q][0]
-    choice3.setAttribute("id", choice_3[q][1])
-    choice4.textContent = choice_4[q][0]
-    choice4.setAttribute("id", choice_4[q][1])
-    choice1.addEventListener("click", Answering)
-    choice2.addEventListener("click", Answering)
-    choice3.addEventListener("click", Answering)
-    choice4.addEventListener("click", Answering)
-    canvasclear();
-}
-function Test() {
-    var number = 30;
-    GameintervalId = setInterval(decrement, 1000)
-    function decrement() {
-        document.getElementById("timer").textContent = number
-        circletimer(30, number)
-        if (number <= 0) {
-            question.textContent = ("Ran out of time")
-            wrong++;
-            Reveal()
-            stop(GameintervalId);
+    else {
+
+
+        document.getElementById("instruction").textContent = ""
+        document.getElementById("EndScreen").textContent = ""
+        document.getElementById("answer").textContent = ""
+        document.getElementById("corrects").textContent = ("")
+        times++
+
+        while (true) {
+            var q = Math.floor(Math.random() * length)
+            console.log(q)
+            if (done[q] != 0) {
+                console.log(done)
+                done[q] = (0);
+                break
+            }
         }
-        else {
-            console.log(number)
-            number--;
+        button_state(false, 1)
+        document.getElementsByClassName("next")[0].children[1].textContent = question_list.questions[q]
+        document.getElementsByClassName("next")[0].children[4].textContent = question_list.extra_trivia[q]
+        document.getElementsByClassName("next")[0].children[4].style.opacity=0
+        $("#carouselExampleControls").carousel("next");
+        document.getElementById("slide-1").classList.toggle("next")
+        document.getElementById("slide-2").classList.toggle("next")
+        console.log(q)
+        choice1.textContent = question_list.choice_1[q][0]
+        choice1.setAttribute("id", question_list.choice_1[q][1])
+        choice2.textContent = question_list.choice_2[q][0]
+        choice2.setAttribute("id", question_list.choice_2[q][1])
+        choice3.textContent = question_list.choice_3[q][0]
+        choice3.setAttribute("id", question_list.choice_3[q][1])
+        choice4.textContent = question_list.choice_4[q][0]
+        choice4.setAttribute("id", question_list.choice_4[q][1])
+        choice1.addEventListener("click", Answering)
+        choice2.addEventListener("click", Answering)
+        choice3.addEventListener("click", Answering)
+        choice4.addEventListener("click", Answering)
+        canvasclear();
+
+        var number = 30;
+        GameintervalId = setInterval(decrement, 1000)
+        function decrement() {
+            document.getElementById("timer").textContent = number
+            circletimer(30, number)
+            if (number <= 0) {
+                document.getElementsByClassName("active")[0].children[1].textContent = ("Ran out of time")
+                wrong++;
+                Reveal()
+                stop(GameintervalId);
+            }
+            else {
+                console.log(number)
+                number--;
+            }
         }
     }
 };
 
+function Answering() {
+    button_state(true, 1)
+    console.log(this)
+    console.log(this.getAttribute("id"))
+    if (this.getAttribute("id") === "correct") {
+        document.getElementsByClassName("active")[0].children[1].textContent = ("Correct")
+        right++;
+    }
+    else {
+        document.getElementsByClassName("active")[0].children[1].textContent = ("Incorrect")
+        wrong++;
+
+    }
+    console.log(document.getElementById("Correct"))
+    stop(GameintervalId);
+    Reveal()
+};
 
 function circletimer(base, current) {
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
-   
-    
+
     ctx.beginPath();
-    ctx.lineWidth=10;
-    ctx.arc(150, 73, 50, 1.5 * Math.PI, (((base - current) * 2 / base) + 1.5) * Math.PI);
+
+    ctx.lineWidth = 10;
+    ctx.arc(150, 95, 50, 1.5 * Math.PI, (((base - current) * 2 / base) + 1.5) * Math.PI);
+    ctx.strokeStyle = "yellow";
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.lineWidth=1
-    ctx.arc(150, 73, 45, 0, 2 * Math.PI);
-    ctx.fillStyle="red"
+    ctx.lineWidth = 1
+    ctx.arc(150, 95, 45, 0, 2 * Math.PI);
+    ctx.fillStyle = "transparent"
     ctx.fill();
+    ctx.strokeStyle = "transparent";
     ctx.stroke();
 
 }
@@ -122,29 +151,12 @@ function canvasclear() {
 function stop(interval) {
     clearInterval(interval);
 };
-function Answering() {
-    button_state(true, 1)
-    console.log(this)
-    console.log(this.getAttribute("id"))
-    if (this.getAttribute("id") === "correct") {
-        question.textContent = ("correct")
-        right++;
-    }
-    else {
-        question.textContent = ("Wrong")
-        wrong++;
-
-    }
-    console.log(document.getElementById("correct"))
-    stop(GameintervalId);
-    Reveal()
-};
 
 function Reveal() {
     canvasclear();
-    answer.textContent = ("The answer is "+document.getElementById("correct").textContent)
-    document.getElementById("instruction").textContent = ("Here's some extra trivia")
-    document.getElementById("correct").style.border="3px solid gold"
+    document.getElementsByClassName("active")[0].children[2].textContent = ("The answer is " + document.getElementById("correct").textContent)
+    document.getElementsByClassName("active")[0].children[4].style.opacity=1
+    document.getElementById("correct").style.border = "3px solid gold"
     var number = 15;
     TransistionintervalId = setInterval(decrement, 1000)
     function decrement() {
@@ -154,8 +166,8 @@ function Reveal() {
         if (number <= 0) {
             stop(TransistionintervalId);
             button_state(false, 1)
-            document.getElementById("correct").style.border=""
-            main();
+            document.getElementById("correct").style.border = ""
+            Question();
         }
         else {
             document.getElementById("timer").textContent = number
@@ -165,56 +177,52 @@ function Reveal() {
 
 }
 
-function endstate() {
+function endstate(active_slide) {
     canvasclear();
-    question.textContent = "Here's how well you did"
-    document.getElementById("corrects").textContent = ("Number of Correct Answers " + right)
-    document.getElementById("wrong").textContent = ("Number of Wrong Answers " + wrong)
-    document.getElementById("EndScreen").textContent = ("Status")
+    document.getElementsByClassName("next")[0].children[0].textContent = ("Status")
+    document.getElementsByClassName("next")[0].children[1].textContent = "Here's how well you did"
+    document.getElementsByClassName("next")[0].children[2].textContent = "Come back again"
+    document.getElementsByClassName("next")[0].children[4].textContent = ("Number of Correct Answers " + right)
+    document.getElementsByClassName("next")[0].children[5].textContent = ("Number of Wrong Answers " + wrong)
+    document.getElementById("slide-1").classList.toggle("next")
+    document.getElementById("slide-2").classList.toggle("next")
+    $("#carouselExampleControls").carousel("next");
+    button_state(true, 0)
     document.getElementById("instruction").textContent = ("Press any key to play again")
     start = false
 }
 
 document.onkeyup = function () {
 
- 
+
     if (start === false) {
         start = true;
-        main();
+        Question();
     }
 }
-
+document.getElementById("slide-2").classList.toggle("next")
 button_state(true, 0)
+
+
+// console.log(document.getElementsByClassName("next")[0].children)
+// // console.log(document.getElementsByClassName("next"))
 
 // var c = document.getElementById("myCanvas");
 // var ctx = c.getContext("2d");
 
 // ctx.beginPath();
-// ctx.lineWidth=20;
-// ctx.arc(150,73,50,0, 2*Math.PI);
+// ctx.lineWidth=5;
+// ctx.arc(150,95,50,0, 2*Math.PI);
+// ctx.strokeStyle = "blue";
 // ctx.stroke();
 
 
 
 // ctx.beginPath();
 // ctx.lineWidth=1;
-// ctx.arc(150,73,40,0,2*Math.PI);
-// ctx.fillStyle="yellow"
+// ctx.arc(150,95,40,0,2*Math.PI);
+// ctx.fillStyle="purple"
 // ctx.fill();
+// ctx.strokeStyle = "purple";
 // ctx.stroke();
 
-
-function main() {
-    if (times === length) {
-        endstate;
-        done = []
-        times = 0;
-        endstate();
-    }
-    else {
-     
-        Question();
-        Test();
-
-    }
-}
