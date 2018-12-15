@@ -12,7 +12,7 @@ body{
 }
 .container{
     margin-top: 50px;
-    min-width: 960px;
+    /* min-width: 960px; */
 }
 
 /* header */
@@ -20,7 +20,7 @@ body{
     margin-bottom: 25px;
 }
 .jumbotron{
-    height: 336px;
+    height: 400px;
 }
 
 /* 2nd row */
@@ -36,13 +36,21 @@ body{
 }
 #timer{
     position: absolute;
-    left:171.5px;
-   bottom:  50px;
+        left:0;
+        right:0;
+        bottom: 0;
+        top:0;
+        margin: auto;
+
    text-align: center;
+   height: 33px;
    width :33px;
 }
+.timer_holder{
+    height: 100%;
+}
 .canvas{
-    height: 200px;
+    height: 100%;
 }
 canvas{
     width: 100%;
@@ -60,9 +68,82 @@ canvas{
 .button{
     margin: 4% 0
 }
-.btn{
+/* .btn{
     background-image: 
-}
+} */
 #choice_1{
     margin-top: 4%;
+}
+
+
+
+
+@media screen and (max-width:991px ){
+    
+    .button{
+        margin: 8% 0
+    }
+    #choice_1{
+        margin-top: 2%;
+    }
+}
+
+@media screen and (max-width:767px ){
+    .container{
+        margin-top:4%
+    }
+    .header{
+        margin-bottom: 4%;
+    }
+    .col-md-4,.col-md-6{
+        width:510px
+    }
+ 
+    .col-md-4{
+        margin-bottom: 4%;
+    }
+
+}
+@media screen and (max-width:575px ){
+    .container{
+        margin-top:4%;
+      
+    }
+    .jumbotron{
+        height: auto;
+        margin-bottom: 3%;
+    }
+    .header{
+        margin-bottom: .2%;
+    }
+    #question{
+        font-size:2.5em;
+    }
+    #answer,.my-4, #corrects,#wrong{
+        margin-bottom: 0;
+    }
+    .my-4{
+        margin-bottom: 0 !important;
+    }
+    .half{
+        padding: 0 15px;
+        height: auto;
+    }
+    .col-md-4,.col-md-6{
+        width:100%
+    }
+    #timer{
+        position: absolute;
+        left:0;
+        right:0;
+        margin: auto;
+      
+    }
+    .col-md-4{
+        margin-bottom: 4%;
+    }
+    .button{
+        margin:0;
+    }
+
 }

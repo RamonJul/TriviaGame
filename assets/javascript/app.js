@@ -51,7 +51,8 @@ function Question() {
         document.getElementById("instruction").textContent = ""
         document.getElementById("EndScreen").textContent = ""
         document.getElementById("answer").textContent = ""
-        document.getElementById("corrects").textContent = ("")
+        document.getElementById("corrects").textContent = ""
+        document.getElementById("wrong").textContent = ""
         times++
 
         while (true) {
@@ -129,13 +130,13 @@ function circletimer(base, current) {
     ctx.beginPath();
 
     ctx.lineWidth = 10;
-    ctx.arc(150, 95, 50, 1.5 * Math.PI, (((base - current) * 2 / base) + 1.5) * Math.PI);
+    ctx.arc(150, 75, 50, 1.5 * Math.PI, (((base - current) * 2 / base) + 1.5) * Math.PI);
     ctx.strokeStyle = "yellow";
     ctx.stroke();
 
     ctx.beginPath();
     ctx.lineWidth = 1
-    ctx.arc(150, 95, 45, 0, 2 * Math.PI);
+    ctx.arc(150, 75, 45, 0, 2 * Math.PI);
     ctx.fillStyle = "transparent"
     ctx.fill();
     ctx.strokeStyle = "transparent";
@@ -177,18 +178,18 @@ function Reveal() {
 
 }
 
-function endstate(active_slide) {
+function endstate() {
     canvasclear();
     document.getElementsByClassName("next")[0].children[0].textContent = ("Status")
     document.getElementsByClassName("next")[0].children[1].textContent = "Here's how well you did"
     document.getElementsByClassName("next")[0].children[2].textContent = "Come back again"
     document.getElementsByClassName("next")[0].children[4].textContent = ("Number of Correct Answers " + right)
     document.getElementsByClassName("next")[0].children[5].textContent = ("Number of Wrong Answers " + wrong)
+    document.getElementsByClassName("next")[0].children[6].textContent = ("Press any key to play again")
     document.getElementById("slide-1").classList.toggle("next")
     document.getElementById("slide-2").classList.toggle("next")
     $("#carouselExampleControls").carousel("next");
     button_state(true, 0)
-    document.getElementById("instruction").textContent = ("Press any key to play again")
     start = false
 }
 
@@ -204,15 +205,15 @@ document.getElementById("slide-2").classList.toggle("next")
 button_state(true, 0)
 
 
-// console.log(document.getElementsByClassName("next")[0].children)
-// // console.log(document.getElementsByClassName("next"))
+console.log(document.getElementsByClassName("next")[0].children)
+// console.log(document.getElementsByClassName("next"))
 
-// var c = document.getElementById("myCanvas");
-// var ctx = c.getContext("2d");
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
 
 // ctx.beginPath();
 // ctx.lineWidth=5;
-// ctx.arc(150,95,50,0, 2*Math.PI);
+// ctx.arc(150,75,50,0, 2*Math.PI);
 // ctx.strokeStyle = "blue";
 // ctx.stroke();
 
@@ -220,7 +221,7 @@ button_state(true, 0)
 
 // ctx.beginPath();
 // ctx.lineWidth=1;
-// ctx.arc(150,95,40,0,2*Math.PI);
+// ctx.arc(150,75,40,0,2*Math.PI);
 // ctx.fillStyle="purple"
 // ctx.fill();
 // ctx.strokeStyle = "purple";
