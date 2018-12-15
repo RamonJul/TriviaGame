@@ -1,5 +1,4 @@
-
-
+// variable declarations
 var start = false;
 var question_list = {
     questions: ["Which two religous figures shared an animated show together?", "In 2017, The Dallas Moning News aplogized for misspelling what word in 1977"],
@@ -9,8 +8,6 @@ var question_list = {
     choice_4: [["Dalai Lama and Ghandi", "wrong"], ["Voyager", "wrong"]],
     extra_trivia: ["The show was called Saint Young Men"," They spelled it wookie"]
 }
-console.log(question_list.choice_1[0][0])
-console.log(question_list)
 var done = [];
 var length;
 var times = 0;
@@ -27,17 +24,8 @@ for (var i = 0; i < length; i++) {
     done.push(1)
 }
 
-function button_state(state, op) {
-    choice1.disabled = state
-    choice2.disabled = state
-    choice3.disabled = state
-    choice4.disabled = state
-    choice1.style.opacity = op
-    choice2.style.opacity = op
-    choice3.style.opacity = op
-    choice4.style.opacity = op
-}
 
+//makes the questions and the timer
 function Question() {
     if (times === length) {
         endstate;
@@ -57,9 +45,9 @@ function Question() {
 
         while (true) {
             var q = Math.floor(Math.random() * length)
-            console.log(q)
+      
             if (done[q] != 0) {
-                console.log(done)
+        
                 done[q] = (0);
                 break
             }
@@ -71,7 +59,7 @@ function Question() {
         $("#carouselExampleControls").carousel("next");
         document.getElementById("slide-1").classList.toggle("next")
         document.getElementById("slide-2").classList.toggle("next")
-        console.log(q)
+        
         choice1.textContent = question_list.choice_1[q][0]
         choice1.setAttribute("id", question_list.choice_1[q][1])
         choice2.textContent = question_list.choice_2[q][0]
@@ -98,17 +86,17 @@ function Question() {
                 stop(GameintervalId);
             }
             else {
-                console.log(number)
+             
                 number--;
             }
         }
     }
 };
 
+// function when an a guess happens
 function Answering() {
     button_state(true, 1)
-    console.log(this)
-    console.log(this.getAttribute("id"))
+ 
     if (this.getAttribute("id") === "correct") {
         document.getElementsByClassName("active")[0].children[1].textContent = ("Correct")
         right++;
@@ -118,11 +106,51 @@ function Answering() {
         wrong++;
 
     }
-    console.log(document.getElementById("Correct"))
+
     stop(GameintervalId);
     Reveal()
 };
+// the reveal of the correct answer
+function Reveal() {
+    canvasclear();
+    document.getElementsByClassName("active")[0].children[2].textContent = ("The answer is " + document.getElementById("correct").textContent)
+    document.getElementsByClassName("active")[0].children[4].style.opacity=1
+    document.getElementById("correct").style.border = "3px solid gold"
+    var number = 15;
+    TransistionintervalId = setInterval(decrement, 1000)
+    function decrement() {
+       
+        document.getElementById("timer").textContent = number
+        circletimer(15, number)
+        if (number <= 0) {
+            stop(TransistionintervalId);
+            button_state(false, 1)
+            document.getElementById("correct").style.border = ""
+            Question();
+        }
+        else {
+            document.getElementById("timer").textContent = number
+            number--;
+        }
+    }
 
+}
+// when they are done
+function endstate() {
+    canvasclear();
+    document.getElementsByClassName("next")[0].children[0].textContent = ("Status")
+    document.getElementsByClassName("next")[0].children[1].textContent = "Here's how well you did"
+    document.getElementsByClassName("next")[0].children[2].textContent = "Come back again"
+    document.getElementsByClassName("next")[0].children[4].textContent = ("Number of Correct Answers " + right)
+    document.getElementsByClassName("next")[0].children[5].textContent = ("Number of Wrong Answers " + wrong)
+    document.getElementsByClassName("next")[0].children[6].textContent = ("Press any key to play again")
+    document.getElementById("slide-1").classList.toggle("next")
+    document.getElementById("slide-2").classList.toggle("next")
+    $("#carouselExampleControls").carousel("next");
+    button_state(true, 0)
+    start = false
+}
+// makes the loading circle
 function circletimer(base, current) {
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
@@ -143,56 +171,30 @@ function circletimer(base, current) {
     ctx.stroke();
 
 }
+// control for all of the buttons
+function button_state(state, op) {
+    choice1.disabled = state
+    choice2.disabled = state
+    choice3.disabled = state
+    choice4.disabled = state
+    choice1.style.opacity = op
+    choice2.style.opacity = op
+    choice3.style.opacity = op
+    choice4.style.opacity = op
+}
+// clears the drwing when done
 function canvasclear() {
     document.getElementById("timer").textContent = ""
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
     ctx.clearRect(0, 0, c.width, c.height);
 }
+//stops the timer
 function stop(interval) {
     clearInterval(interval);
 };
 
-function Reveal() {
-    canvasclear();
-    document.getElementsByClassName("active")[0].children[2].textContent = ("The answer is " + document.getElementById("correct").textContent)
-    document.getElementsByClassName("active")[0].children[4].style.opacity=1
-    document.getElementById("correct").style.border = "3px solid gold"
-    var number = 15;
-    TransistionintervalId = setInterval(decrement, 1000)
-    function decrement() {
-        console.log(number)
-        document.getElementById("timer").textContent = number
-        circletimer(15, number)
-        if (number <= 0) {
-            stop(TransistionintervalId);
-            button_state(false, 1)
-            document.getElementById("correct").style.border = ""
-            Question();
-        }
-        else {
-            document.getElementById("timer").textContent = number
-            number--;
-        }
-    }
-
-}
-
-function endstate() {
-    canvasclear();
-    document.getElementsByClassName("next")[0].children[0].textContent = ("Status")
-    document.getElementsByClassName("next")[0].children[1].textContent = "Here's how well you did"
-    document.getElementsByClassName("next")[0].children[2].textContent = "Come back again"
-    document.getElementsByClassName("next")[0].children[4].textContent = ("Number of Correct Answers " + right)
-    document.getElementsByClassName("next")[0].children[5].textContent = ("Number of Wrong Answers " + wrong)
-    document.getElementsByClassName("next")[0].children[6].textContent = ("Press any key to play again")
-    document.getElementById("slide-1").classList.toggle("next")
-    document.getElementById("slide-2").classList.toggle("next")
-    $("#carouselExampleControls").carousel("next");
-    button_state(true, 0)
-    start = false
-}
-
+//star game and intial state
 document.onkeyup = function () {
 
 
@@ -201,22 +203,23 @@ document.onkeyup = function () {
         Question();
     }
 }
+
 document.getElementById("slide-2").classList.toggle("next")
 button_state(true, 0)
 
 
-console.log(document.getElementsByClassName("next")[0].children)
-// console.log(document.getElementsByClassName("next"))
 
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
 
+
+// var c = document.getElementById("myCanvas");
+// var ctx = c.getContext("2d");
+// console.log(document.getElementsByClassName("next")[0].children)
+ // console.log(document.getElementsByClassName("next"))
 // ctx.beginPath();
 // ctx.lineWidth=5;
 // ctx.arc(150,75,50,0, 2*Math.PI);
 // ctx.strokeStyle = "blue";
 // ctx.stroke();
-
 
 
 // ctx.beginPath();
